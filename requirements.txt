@@ -1,0 +1,11 @@
+# pip install -r requirements.txt
+numpy
+pandas
+matplotlib
+datetime
+yfinance
+requests
+sqlalchemy
+ccxt
+rich
+IPython
