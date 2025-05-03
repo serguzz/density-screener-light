@@ -1,12 +1,12 @@
-# Cell 1: DB manager
 from sqlalchemy import Column, Float, String, DateTime, Integer, create_engine, UniqueConstraint
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
-# Create base class for declarative models
+# Base class for declarative models
 Base = declarative_base()
 
+# Density model for SQLAlchemy
 class Density(Base):
     """SQLAlchemy model for storing order book densities"""
     __tablename__ = 'densities'

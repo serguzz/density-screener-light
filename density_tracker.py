@@ -22,8 +22,7 @@ class DensityTracker:
         value_threshold = self.value_thresholds.get(pair.split('/')[0], 
                                                     self.value_thresholds['default'])
 
-        # Step 1: Fetch order book
-        # print(f"calling {pair}")
+        # Fetch order book
         try:
             order_book = self.exchange.fetch_order_book(pair, limit=1000)
         except Exception as e:
@@ -32,13 +31,12 @@ class DensityTracker:
         asks = order_book['asks']
         bids = order_book['bids']
 
-        max_ask_price = asks[-1][0] if asks else float('inf')
+        # max_ask_price = asks[-1][0] if asks else float('inf')
         min_ask_price = asks[0][0] if asks else 0
         max_bid_price = bids[0][0] if bids else float('inf')
-        min_bid_price = bids[-1][0] if bids else 0
-        # print(f"max_ask: {max_ask_price}, min_ask: {min_ask_price}, max_bid: {max_bid_price}, min_bid: {min_bid_price}")
+        # min_bid_price = bids[-1][0] if bids else 0
 
-        # Step 2: Identify new densities in the order book
+        # Identify new densities in the order book
         new_densities = []
         for price, size in asks:
             worth = price * size
@@ -64,7 +62,7 @@ class DensityTracker:
                     "spread_price": max_bid_price
                 })
 
-        # Step 3: Fetch old densities for the pair from DB
+        # Fetch old densities for the pair from DB
         old_densities = self.db_manager.fetch_densities(pair)
 
         # Step 4: Compare old densities with new densities
@@ -74,7 +72,7 @@ class DensityTracker:
             # old_worth = old_density.worth
             # old_spread_price = old_density.spread_price
             
-            # (a) Update existing densities
+            # Update existing densities
             matching_new_density = next(
                 (d for d in new_densities 
                  if d["price"] == old_price and d["side"] == old_side), 
@@ -90,12 +88,8 @@ class DensityTracker:
                 )
                 new_densities.remove(matching_new_density)
                 continue
-
-            '''
-            Removed the obolete code, as Order Book limit=1000 fetches much futher than 10% price_ragne_threshold
-            '''
             
-            # (c) Remove densities not matching any condition
+            # Remove densities not matching any condition
             self.db_manager.delete_density(old_density)
 
         # Add new densities that didn't match any old density
@@ -120,9 +114,7 @@ class DensityTracker:
         ask_highlight_style = Style(bgcolor="#ffe4e1")  # Light red background for "Ask"
         bid_highlight_style = Style(bgcolor="#f0fff0")  # Light green background for "Bid"
 
-        '''
-        TODO: Highlight densities < 1.5% and older than 30 mins
-        '''
+        # TODO: Highlight densities < 1.5% and older than 30 mins
         
         display_price_threshold = self.display_price_threshold   # show only debsities within 5% from current price
         display_detected_threshold = self.display_detected_threshold  # minimum minutes to show the density
