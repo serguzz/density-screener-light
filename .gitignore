@@ -1,8 +1,10 @@
 # Ignore directories
 .ipynb_checkpoints
+.venv
 __pycache__
 
 # Ignore file
+DensityScreener.ipynb
 key.txt
 densities.db
 densities.csv

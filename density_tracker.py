@@ -7,7 +7,7 @@ from datetime import datetime
 import time
 
 
-class BinanceDensityTracker:
+class DensityTracker:
     def __init__(self, exchange, db_manager, value_thresholds, display_price_threshold=0.05, display_detected_threshold=10):
         self.exchange = exchange
         self.db_manager = db_manager
