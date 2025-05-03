@@ -4,6 +4,7 @@
 __pycache__
 
 # Ignore file
+
 DensityScreener.ipynb
 key.txt
 densities.db
