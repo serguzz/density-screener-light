@@ -10,7 +10,7 @@ Density Screener is a Python-based project designed to analyze and visualize den
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/serguzz/density_screener.git
+    git clone https://github.com/serguzz/density-screener-light.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -22,8 +22,7 @@ Density Screener is a Python-based project designed to analyze and visualize den
     ```
 
 ## Usage
-1. Run the DensityScreener notebook.
-2. Websocket notebooks are in developement and cannot be used yet.
+Run main.py
 
 
 ## Contributing
