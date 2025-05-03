@@ -1,5 +1,4 @@
-# Main Density Tracking Class
-from rich.console import Console, console
+from rich.console import Console
 from rich.table import Table
 from rich.style import Style
 from IPython.display import clear_output
@@ -7,6 +6,7 @@ from datetime import datetime
 import time
 
 
+# Main Density Tracking Class
 class DensityTracker:
     def __init__(self, exchange, db_manager, value_thresholds, display_price_threshold=0.05, display_detected_threshold=10):
         self.exchange = exchange
@@ -71,8 +71,8 @@ class DensityTracker:
         for old_density in old_densities:
             old_price = old_density.price
             old_side = old_density.side
-            old_worth = old_density.worth
-            old_spread_price = old_density.spread_price
+            # old_worth = old_density.worth
+            # old_spread_price = old_density.spread_price
             
             # (a) Update existing densities
             matching_new_density = next(
@@ -113,6 +113,8 @@ class DensityTracker:
 
     def display_all_densities(self):
         """Display all densities in a table."""
+
+        console = Console()
 
         # Define background styles for highlighting
         ask_highlight_style = Style(bgcolor="#ffe4e1")  # Light red background for "Ask"

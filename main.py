@@ -1,7 +1,5 @@
-import config
-
 import ccxt
-from rich.console import Console
+# from rich.console import Console
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_manager import DatabaseManager
@@ -22,7 +20,7 @@ def main():
     })
 
     # Create a console instance
-    console = Console()
+    # console = Console()
 
     # Create and start the tracker
     density_tracker = DensityTracker(
